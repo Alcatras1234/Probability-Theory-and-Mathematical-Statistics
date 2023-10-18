@@ -1,0 +1,147 @@
+\documentclass[amstex,11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+
+\usepackage[english,russian]{babel}
+\usepackage{amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{relsize}
+
+\usepackage{systeme}
+
+\usepackage{indentfirst} % Красная строка
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{textcomp}
+
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+%\usepackage{colortbl}% http://ctan.org/pkg/colortbl
+\usepackage{multirow}% http://ctan.org/pkg/multirow
+\usepackage{graphicx}% http://ctan.org/pkg/graphicx
+
+\usepackage[unicode]{hyperref}
+\usepackage{xcolor}
+
+\definecolor{linkcolor}{HTML}{0000E6}
+\definecolor{urlcolor}{HTML}{0000E6}
+\definecolor{citecolor}{HTML}{0000E6}
+
+
+\hypersetup{pdfpagemode=None,linktoc=page,citecolor=citecolor,linkcolor=linkcolor,urlcolor=urlcolor,colorlinks=true}
+
+\addtolength{\textwidth}{130pt}
+\addtolength{\hoffset}{-2cm}
+\addtolength{\voffset}{-2cm}
+\addtolength{\textheight}{90pt}
+
+\tolerance=3000
+\def\baselinestretch{1.1}
+\flushbottom
+
+\parindent=1cm
+
+\theoremstyle{definition}
+\newtheorem{problem}{Задача}
+\newtheorem{ex}[problem]{Задача}
+\newtheorem{disc}{Условие}
+\newtheorem{resh}{Решение:}
+\newtheorem{pl}{Первый Способ:}
+\newtheorem{pk}{Второй Способ:}
+\newtheorem{answer}{Ответ:}
+
+
+%в новом разделе нумеруем заново
+\makeatletter
+\@addtoreset{problem}{section}
+\makeatother
+
+%Параметр от 0 до 9, иначе работать не будет.
+\newcommand{\atten}[1]{\textcolor{red}{+#1 внимательность}}
+\newcommand{\know}[1]{\textcolor{teal}{+#1 знания}}
+\newcommand{\brave}[1]{\textcolor{violet}{+#1 храбрость}}
+\newcommand{\wait}[1]{\textcolor{blue}{+#1 терпение}}
+\newcommand{\bruteforce}[1]{\textcolor{brown}{+#1 грубая сила}}
+\newcommand{\beauty}[1]{\textcolor{violet}{+#1 чувство прекрасного}}
+
+\usepackage{tikz}
+
+\begin{document}
+%\vspace{-15pt}
+
+\centerline{\textbf{ИДЗ 1}}
+\centerline{\textbf{Вариант 4}}
+\begin{flushright}
+\emph{Бакиров Даниал Жандарбекович БПИ 226}
+\end{flushright}
+
+\thispagestyle{empty}
+
+\section{Задачи}
+
+
+\begin{ex}
+\begin{disc}
+    Из колоды карт (52 карты) наудачу извлекаются 3 карты. Определить
+вероятность того, что это будут тройка, семерка, туз.
+\\
+\\
+\begin{resh}
+    \begin{pl}
+        Можно рассмотреть решение с вереоятностью, где мы забираем карты из общего числа. То есть, все имеются 4 карты на которых есть троейка, 4 карты на которых есть семерка и 4 карты на которых есть туз. Всего карт у нас 52, а нужных нам карт 12 => $\frac{12}{52} $ - это вероятность выбора тройки. $\frac{12}{52} $ - это вероятность выбора семерки. $\frac{4}{50} $ - это вероятность выбора туза. 
+        Тогда общая вероятность: 
+        \begin{center}
+        $\frac{12}{52} $ $\cdot$ $\frac{12}{52}$ $\cdot$ $\frac{4}{50} $ $\simeq$ $0,0028$
+        \end{center}
+    \end{pl}
+    \begin{pk}
+        Всего элементов будет $C_{52}^3$. Это так т.к. нам нужно выбрать 3 карты из 52 и мы считаем количество способов. $C_{52}^3 = 22100$. В числителе стоит выражение $4 * 4 * 4 = 64$ перемножаем т.к. вероятности не зависимы
+        Тогда общая вероятность: 
+        \begin{center}
+        $\cdot$ $\frac{4 * 4 * 4}{C_{52}^3} = \frac{64}{22100}$ $\simeq$ $0,0028$
+        \end{center}
+    \end{pk}
+    \begin{answer}
+        Вероятность что извлекут тройку, семерку и туз равна: 0.0028.
+    \end{answer}
+\end{resh}
+\end{disc}
+
+\begin{disc}
+    Счетчик регистрирует частицы трех типов: А, В и С. Вероятность
+появления этих частиц такова: Р(А)=0.2, Р(В)=0.5, Р(С)=0.3. Частицы каждого из этих
+типов счетчик улавливает с вероятностью: Р1 =0.8, Р 2 =0.2, Р 3 =0.4. Счетчик отметил
+частицу. По критерию наибольшей вероятности определить, какая это была частица.
+\\
+\\
+\begin{resh}
+    В этой Задаче воспользуемся формулами полной вероятность и формула Байеса. Почему я это использую? Потому что у на должно произойти событие при условии, что произошло другое. То есть в нашем случае, у нас должна быть уловленна некая частица. То есть, мы уловили частицу при условии что она была первая, вторая, третья и т.д. Одним словом, как поступление новых данных о событии влияет на вероятность исхода этого события.
+    Сначала подсчитаем полную вероятность. Обозначим это буквой D.
+    \begin{center}
+    P(D) = $P(A) * P_1 + P(B) * P_2 + P(C) * P_3 = 0.2 * 0.8 + 0.5 * 0.2 + 0.3 * 0.4 = 0.38$
+    \end{center}
+    Далее, по формуле Байеса подсчитаем вероятности событий и сравним их.
+    Формула Байеса.\\ 
+    Вероятость, что мы уловили первую частицу: 
+    \begin{center}
+    $P(P_1|A) = \frac{P(A|P_1) * P(P_1)}{P(D)} \Rightarrow P(P_1|A) = \frac{0.2 * 0.8}{0.38} = \frac{8}{19}$ 
+    \end{center}
+    Вероятость, что мы уловили вторую частицу: 
+    \begin{center}
+    $P(P_2|B) = \frac{P(B|P_2) * P(P_2)}{P(D)} \Rightarrow P(P_2|B) = \frac{0.5 * 0.2}{0.38} = \frac{5}{19}$ 
+    \end{center}
+    Вероятость, что мы уловили третью частицу: 
+    \begin{center}
+    $P(P_3|C) = \frac{P(C|P_3) * P(P_3)}{P(D)} \Rightarrow P(P_3|C) = \frac{0.3 * 0.4}{0.38} = \frac{6}{19}$ 
+    \end{center}
+    Далее мы видим, что вероятность улавливания первой частицы больше, значит, ее уловили первой.
+    \begin{answer}
+        Наибольшая вероятность у первой частицы.
+    \end{answer}
+\end{resh}
+\end{disc}
+\end{ex}
+
+
+\end{document} 
